@@ -1,22 +1,28 @@
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import 'hammerjs';
 
-
 import { AppComponent } from './app.component';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { MatButtonModule} from '@angular/material';
-
+import { CoreModule } from './core/core.module';
+import { MaterialModule } from './material/material.module';
+import { FunctionsComponent } from './functions/functions.component';
+import { LoginComponent } from './login/login.component';
+import { ToolbarComponent } from './core/layout/toolbar/toolbar.component';
 
 @NgModule({
   declarations: [
-    AppComponent
-  ],
+    AppComponent,
+    FunctionsComponent,
+    LoginComponent,
+    ToolbarComponent
+    ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    MatButtonModule
+    CoreModule,
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]
