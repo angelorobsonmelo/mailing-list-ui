@@ -10,7 +10,6 @@ import { MaterialModule } from './material/material.module';
 import { FunctionsComponent } from './functions/functions.component';
 import { LoginComponent } from './login/login.component';
 import { ToolbarComponent } from './core/layout/toolbar/toolbar.component';
-import { CategoryComponent } from './category/category.component';
 import { CategoriesComponent } from './categories/categories.component';
 
 @NgModule({
@@ -19,7 +18,7 @@ import { CategoriesComponent } from './categories/categories.component';
     FunctionsComponent,
     LoginComponent,
     ToolbarComponent,
-    CategoryComponent,
+    CategoriesComponent,
     CategoriesComponent
     ],
   imports: [
