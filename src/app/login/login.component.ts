@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Route } from '@angular/compiler/src/core';
 import { AuthService } from '../auth/AuthService';
+import { JwtAuthentication } from '../core/model';
 
 @Component({
   selector: 'app-login',
@@ -9,6 +10,7 @@ import { AuthService } from '../auth/AuthService';
 })
 
 export class LoginComponent implements OnInit {
+  jwtAuthentication = new JwtAuthentication();
 
   ngOnInit() {
   }
@@ -17,8 +19,11 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
   ) { }
 
-  login(username: string, password: string): void {
-    this.authService.auth(username, password);
+  login(email: string, password: string): void {
+    this.jwtAuthentication.email = email;
+    this.jwtAuthentication.password = password;
+
+    this.authService.auth(this.jwtAuthentication);
   }
 
 }
