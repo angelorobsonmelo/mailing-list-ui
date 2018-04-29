@@ -11,17 +11,11 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  constructor() {
-  }
+  username: string;
+  password: string;
 
-  username : string
-  password : string
+  login(): void {
 
-  login() : void {
-    if(this.username == 'admin' && this.password == 'admin'){
-    }else {
-      alert("Invalid credentials");
-    }
   }
 
 }
