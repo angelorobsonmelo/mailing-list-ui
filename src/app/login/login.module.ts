@@ -6,6 +6,7 @@ import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login.component';
 import { LoginService } from './login.service';
 import { MatCardTitle, MatCardModule } from '@angular/material';
+import { AuthService } from '../auth/AuthService';
 
 @NgModule({
   imports: [
@@ -14,6 +15,6 @@ import { MatCardTitle, MatCardModule } from '@angular/material';
     CoreModule
   ],
   declarations: [LoginComponent],
-  providers: [LoginService]
+  providers: [LoginService, AuthService]
 })
 export class LoginModule { }

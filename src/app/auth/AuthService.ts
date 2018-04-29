@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import {Http, Response} from "@angular/http";
 import { User } from './user';
-import {LoginService} from "../login/login.service";
-import {Response} from "@angular/http";
+import { LoginService } from '../login/login.service';
 
 @Injectable()
 export class AuthService {
@@ -13,17 +13,21 @@ export class AuthService {
     return this.loggedIn.asObservable();
   }
 
-  constructor(private router: Router, private loginService: LoginService) {
+  constructor(private router: Router, private http: Http, private loginService: LoginService) {
   }
 
-  login(user: User):boolean {
-    // this.loginService.logar(user).subscribe((response: Response)=>{
-    //   if (response.json().cod_perfil_usuario == 2) {
-    //     localStorage.setItem('usuario', response.text());
-    //     this.loggedIn.next(true);
-    //     this.router.navigate(['/posts']);
-    //   }
-    // });
+  auth(username: string, password: string):boolean {
+    this.loginService.login(username, password).subscribe( response => {
+      localStorage.setItem('user', response.json());
+        this.loggedIn.next(true);
+        // this.router.navigate(['/posts']);
+  },
+  error => {
+      console.log(error);
+
+  }
+    );
+
     return false;
   }
 

@@ -4,17 +4,20 @@ import { CommonModule } from '@angular/common';
 import { Title } from '@angular/platform-browser';
 import { ToolbarComponent } from './layout/toolbar/toolbar.component';
 import { HttpModule } from '@angular/http';
+import { FormsModule } from '@angular/forms';
 
    
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
-    HttpModule
+    HttpModule,
+    FormsModule
      ],
   exports: [
     RouterModule,
-    HttpModule],
+    HttpModule,
+    FormsModule],
   declarations: [],
   providers: [
     Title,
