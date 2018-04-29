@@ -5,13 +5,14 @@ import { Http, Response } from "@angular/http";
 import { LoginService } from '../login/login.service';
 import { JwtAuthentication } from '../core/model';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { TokenStorage } from '../core/token.storage';
 
 const helper = new JwtHelperService();
+const tokenStorage = new TokenStorage();
 
 @Injectable()
 export class AuthService {
   private loggedIn = new BehaviorSubject<boolean>(false);
-  private stringContais: string;
 
   get isLoggedIn() {
     return this.loggedIn.asObservable();
@@ -22,24 +23,21 @@ export class AuthService {
 
   auth(jwtAuthentication: JwtAuthentication): boolean {
     this.loginService.login(jwtAuthentication).subscribe(response => {
-      let responseServer = response.json();
-      let decodedToken = helper.decodeToken(responseServer.data.token);
+      let token = response.json().data.token;
+      let decodedToken = helper.decodeToken(token);
 
-      localStorage.setItem('token', responseServer.token);
-      localStorage.setItem('user', decodedToken);
+      tokenStorage.saveRawToken(token);
+      tokenStorage.saveDecodedToken(decodedToken);
 
       this.loggedIn.next(true);
-
-      console.log(decodedToken);
-
-      // this.router.navigate(['/posts']);
+      this.router.navigate(['/posts']);
     },
       error => {
         console.log(error.json());
         let exception = error.json().exception;
         var re = "BadCredentialsException";
         if (exception.search(re) == -1) {
-          console.log("Does not contain Apples");
+          console.log(exception);
         } else {
           console.log("email or password invalid");
         }
