@@ -30,7 +30,7 @@ export class AuthService {
       tokenStorage.saveDecodedToken(decodedToken);
 
       this.loggedIn.next(true);
-      this.router.navigate(['/posts']);
+      this.router.navigate(['/contacts']);
     },
       error => {
         console.log(error.json());

@@ -14,11 +14,12 @@ import { LoginComponent } from './login/login.component';
 import { ToolbarComponent } from './core/layout/toolbar/toolbar.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { MatCardTitle } from '@angular/material';
+import { ContactsComponent } from './contacts/contacts.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ToolbarComponent 
+    ToolbarComponent,
     ],
   imports: [
     CommonModule,

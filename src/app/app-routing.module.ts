@@ -13,6 +13,11 @@ const routes: Routes = [
     path: 'login',
     loadChildren: 'app/login/login.module#LoginModule'
   },
+  {
+    path: 'contacts',
+    loadChildren: 'app/contacts/contacts.module#ContactsModule'
+  },
+
   { path: '**', redirectTo: '/login' }
 
 ];

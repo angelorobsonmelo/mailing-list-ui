@@ -25,8 +25,8 @@ export class AuthGuard implements CanActivate {
       .take(1)
       .map((isLoggedIn: boolean) => {
         if (!isLoggedIn){
-          localStorage.removeItem('usuario');
-          this.router.navigate(['/admin']);
+          localStorage.clear();
+          this.router.navigate(['/login']);
           return false;
         }
         return true;
