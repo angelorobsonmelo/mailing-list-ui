@@ -59,7 +59,8 @@
   <mat-paginator [length]="length"
               [pageSize]="pageSize"
               [pageSizeOptions]="pageSizeOptions"
-              (page)="aomudar($event)">
+              [showFirstLastButtons]="true"
+              (page)="changePaginator($event)">
 </mat-paginator>
 </div>
 <br>

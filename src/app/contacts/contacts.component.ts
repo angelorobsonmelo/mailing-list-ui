@@ -2,7 +2,7 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { ContactsService, ContactFilter } from './contacts.service';
 import { Contact } from '../core/model';
-import {PageEvent} from '@angular/material';
+import { PageEvent } from '@angular/material';
 
 
 
@@ -12,11 +12,11 @@ import {PageEvent} from '@angular/material';
   styleUrls: ['./contacts.component.css']
 })
 export class ContactsComponent implements OnInit {
- // MatPaginator Inputs
+  // MatPaginator Inputs
 
- length:any;
- pageSize:any;
- pageSizeOptions:any [];
+  length: any;
+  pageSize: any;
+  pageSizeOptions: any[];
 
   conctactFilter = new ContactFilter();
 
@@ -25,7 +25,7 @@ export class ContactsComponent implements OnInit {
   dataSource: any;
 
   ngOnInit() {
-   this.getContacts();
+    this.getContacts();
   }
 
   getContacts(page = 0, pageSize = 25) {
@@ -45,9 +45,8 @@ export class ContactsComponent implements OnInit {
     );
   }
 
-  aomudar(event: PageEvent) {
-      console.log(event);
-      this.getContacts(event.pageIndex, event.pageSize)
+  changePaginator(event: PageEvent) {
+    this.getContacts(event.pageIndex, event.pageSize)
   }
 
   displayedColumns = ['username Instagram', 'category', 'gender', 'functions', 'inserted by', 'actions'];
