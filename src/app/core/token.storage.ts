@@ -23,7 +23,10 @@ export class TokenStorage {
   }
 
   public getToken(): string {
-    return localStorage.getItem(TOKEN_KEY);
+    console.log("está chamando o get token");
+    let token = localStorage.getItem(TOKEN_KEY);
+    console.log(token);
+    return token;
   }
 
   public getDecodedToken(): string {

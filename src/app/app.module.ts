@@ -15,12 +15,14 @@ import { ToolbarComponent } from './core/layout/toolbar/toolbar.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { MatCardTitle } from '@angular/material';
 import { ContactsComponent } from './contacts/contacts.component';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { TokenInterceptor } from './auth/TokenInterceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
     ToolbarComponent,
-    ],
+  ],
   imports: [
     CommonModule,
     BrowserModule,
