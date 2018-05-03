@@ -26,14 +26,14 @@ export class ContactsService {
   constructor(public http: HttpClient) { }
 
 
-  search(filter: ContactFilter, page: number): Observable<Response> {
+  search(filter: ContactFilter, page: number, perPage: number): Observable<any> {
     const s = new URLSearchParams();
 
     console.log(filter);
 
     s.set('pag', page.toString());
 
-    return this.http.post<Response>(`${this.contactsUrl}/filter`, filter);
+    return this.http.post<any>(`${this.contactsUrl}/filter?pag=${page}&perPage=${perPage}`, filter);
   }
 
 }

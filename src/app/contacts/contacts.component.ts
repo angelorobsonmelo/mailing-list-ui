@@ -1,6 +1,10 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { ContactsService, ContactFilter } from './contacts.service';
+import { Contact } from '../core/model';
+import {PageEvent} from '@angular/material';
+
+
 
 @Component({
   selector: 'app-contacts',
@@ -8,64 +12,45 @@ import { ContactsService, ContactFilter } from './contacts.service';
   styleUrls: ['./contacts.component.css']
 })
 export class ContactsComponent implements OnInit {
+ // MatPaginator Inputs
+
+ length:any;
+ pageSize:any;
+ pageSizeOptions:any [];
 
   conctactFilter = new ContactFilter();
 
   constructor(private contactsService: ContactsService) { }
 
+  dataSource: any;
+
   ngOnInit() {
-    this.contactsService.search(this.conctactFilter, 0).subscribe(response => {
-          console.log(response);
+   this.getContacts();
+  }
+
+  getContacts(page = 0, pageSize = 25) {
+    this.contactsService.search(this.conctactFilter, page, pageSize).subscribe(response => {
+      this.length = response.data.totalElements;
+      this.pageSize = response.data.size;
+      this.pageSizeOptions = [5, 10, 15, 20, 25];
+
+      console.log(response.data);
+
+      let contacts = response.data.content;
+      this.dataSource = new MatTableDataSource<Contact>(contacts);
     },
       error => {
-            console.log(error)
+        console.log(error)
       }
     );
   }
 
-
-
-
-
-  displayedColumns = ['position', 'function', 'actions'];
-  dataSource = new MatTableDataSource<Element>(ELEMENT_DATA);
-
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-
-  /**
-   * Set the paginator after the view init since this component will
-   * be able to query its view for the initialized paginator.
-   */
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
+  aomudar(event: PageEvent) {
+      console.log(event);
+      this.getContacts(event.pageIndex, event.pageSize)
   }
-}
 
-export interface Element {
-  function: string;
-  position: number;
-}
+  displayedColumns = ['username Instagram', 'category', 'gender', 'functions', 'inserted by', 'actions'];
 
-const ELEMENT_DATA: Element[] = [
-  { position: 1, function: 'Hydrogen' },
-  { position: 2, function: 'Helium' },
-  { position: 3, function: 'Lithium' },
-  { position: 4, function: 'Beryllium' },
-  { position: 5, function: 'Boron' },
-  { position: 6, function: 'Carbon' },
-  { position: 7, function: 'Nitrogen' },
-  { position: 8, function: 'Oxygen' },
-  { position: 9, function: 'Fluorine' },
-  { position: 10, function: 'Neon' },
-  { position: 11, function: 'Sodium' },
-  { position: 12, function: 'Magnesium' },
-  { position: 13, function: 'Aluminum' },
-  { position: 14, function: 'Silicon' },
-  { position: 15, function: 'Phosphorus' },
-  { position: 16, function: 'Sulfur' },
-  { position: 17, function: 'Chlorine' },
-  { position: 18, function: 'Argon' },
-  { position: 19, function: 'Potassium' },
-  { position: 20, function: 'Calcium' },
-];
+}
 

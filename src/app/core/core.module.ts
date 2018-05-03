@@ -6,14 +6,14 @@ import { ToolbarComponent } from './layout/toolbar/toolbar.component';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 
-   
+
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
     HttpModule,
     FormsModule
-     ],
+  ],
   exports: [
     RouterModule,
     HttpModule,
