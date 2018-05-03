@@ -1,7 +1,32 @@
 <form>
-  <mat-form-field class="col-4">
-    <input matInput placeholder="Search function">
+  <mat-form-field class="col-2">
+    <input matInput placeholder="Username Instagram">
   </mat-form-field>
+
+  <mat-form-field class="col-2">
+      <mat-select placeholder="Category">
+        <mat-option *ngFor="let food of foods" [value]="food.value">
+          {{ food.viewValue }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="col-2">
+        <mat-select placeholder="Gender">
+          <mat-option *ngFor="let food of foods" [value]="food.value">
+            {{ food.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="col-2">
+          <mat-select placeholder="Functions" multiple>
+            <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        &nbsp;&nbsp;
+        <button mat-raised-button color="primary"
+        class="col-1">Filter</button>
 </form>
 
 <div class="example-container mat-elevation-z8">

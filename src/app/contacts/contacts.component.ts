@@ -3,6 +3,7 @@ import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { ContactsService, ContactFilter } from './contacts.service';
 import { Contact } from '../core/model';
 import { PageEvent } from '@angular/material';
+import { FormControl } from '@angular/forms';
 
 
 
@@ -49,6 +50,16 @@ export class ContactsComponent implements OnInit {
     this.getContacts(event.pageIndex, event.pageSize)
   }
 
+  foods = [
+    {value: 'steak-0', viewValue: 'Steak'},
+    {value: 'pizza-1', viewValue: 'Pizza'},
+    {value: 'tacos-2', viewValue: 'Tacos'}
+  ];
+
+  toppings = new FormControl();
+
+  toppingList = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
+  
   displayedColumns = ['username Instagram', 'category', 'gender', 'functions', 'inserted by', 'actions'];
 
 }
