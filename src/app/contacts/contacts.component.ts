@@ -13,8 +13,7 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./contacts.component.css']
 })
 export class ContactsComponent implements OnInit {
-  // MatPaginator Inputs
-
+  
   length: any;
   pageSize: any;
   pageSizeOptions: any[];
@@ -58,7 +57,10 @@ export class ContactsComponent implements OnInit {
 
   toppings = new FormControl();
 
-  toppingList = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
+  functionList = [
+    {'id': 1, 'function': 'modelo de stories'}, 
+    {'id': 2, 'function': 'modelo'}, 
+  ];
   
   displayedColumns = ['username Instagram', 'category', 'gender', 'functions', 'inserted by', 'actions'];
 

@@ -1,11 +1,11 @@
-<form>
+<form autocomplete="off" (ngSubmit)="getContacts()">
   <mat-form-field class="col-2">
-    <input matInput placeholder="Username Instagram">
+    <input matInput placeholder="Username Instagram" name="userNameInstagram" [(ngModel)]="conctactFilter.userNameInstagram">
   </mat-form-field>
 
   <mat-form-field class="col-2">
       <mat-select placeholder="Category">
-        <mat-option *ngFor="let food of foods" [value]="food.value">
+        <mat-option *ngFor="let food of foods" [value]="food.value" >
           {{ food.viewValue }}
         </mat-option>
       </mat-select>
@@ -20,8 +20,8 @@
       </mat-form-field>
 
       <mat-form-field class="col-2">
-          <mat-select placeholder="Functions" multiple>
-            <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+          <mat-select placeholder="Functions" multiple name="functions" [(ngModel)]="conctactFilter.functions">
+            <mat-option *ngFor="let function of functionList" [value]="function">{{function.function}}</mat-option>
           </mat-select>
         </mat-form-field>
         &nbsp;&nbsp;

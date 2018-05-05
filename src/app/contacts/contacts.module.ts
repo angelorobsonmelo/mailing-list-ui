@@ -1,3 +1,4 @@
+import { FormsModule } from '@angular/forms';
 import { MaterialModule } from './../material/material.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -15,7 +16,8 @@ import { HttpClient } from '@angular/common/http';
     CommonModule,
     MaterialModule,
     ContactsRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
   ],
   declarations: [ContactsComponent],
   providers: [
