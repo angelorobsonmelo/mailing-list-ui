@@ -9,6 +9,8 @@ import { ContactsService } from './contacts.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { TokenInterceptor } from '../auth/TokenInterceptor';
 import { HttpClient } from '@angular/common/http';
+import { FunctionService } from '../functions/function.service';
+import { CategoryService } from '../categories/categories.service';
 
 
 @NgModule({
@@ -22,8 +24,10 @@ import { HttpClient } from '@angular/common/http';
   declarations: [ContactsComponent],
   providers: [
     ContactsService,
+    FunctionService,
+    CategoryService,
     HttpClient,
-      {
+    {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true

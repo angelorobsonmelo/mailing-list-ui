@@ -4,29 +4,30 @@
   </mat-form-field>
 
   <mat-form-field class="col-2">
-      <mat-select placeholder="Category">
-        <mat-option *ngFor="let food of foods" [value]="food.value" >
-          {{ food.viewValue }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+    <mat-select placeholder="Category" name="category" [(ngModel)]="conctactFilter.category">
+      <mat-option [value]="" selected>None</mat-option>
+      <mat-option *ngFor="let category of categories" [value]="category">
+        {{ category.category }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 
-    <mat-form-field class="col-2">
-        <mat-select placeholder="Gender">
-          <mat-option *ngFor="let food of foods" [value]="food.value">
-            {{ food.viewValue }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+  <mat-form-field class="col-2">
+    <mat-select placeholder="Gender" name="gender" [(ngModel)]="conctactFilter.gender">
+      <mat-option [value]="" selected>None</mat-option>
+      <mat-option *ngFor="let gender of genders" [value]="gender">
+        {{ gender }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 
-      <mat-form-field class="col-2">
-          <mat-select placeholder="Functions" multiple name="functions" [(ngModel)]="conctactFilter.functions">
-            <mat-option *ngFor="let function of functionList" [value]="function">{{function.function}}</mat-option>
-          </mat-select>
-        </mat-form-field>
-        &nbsp;&nbsp;
-        <button mat-raised-button color="primary"
-        class="col-1">Filter</button>
+  <mat-form-field class="col-2">
+    <mat-select placeholder="Functions" multiple name="functions" [(ngModel)]="conctactFilter.functions">
+      <mat-option *ngFor="let function of functions" [value]="function">{{function.function}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  &nbsp;&nbsp;
+  <button mat-raised-button color="primary" class="col-1">Filter</button>
 </form>
 
 <div class="example-container mat-elevation-z8">
@@ -81,12 +82,9 @@
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
 
-  <mat-paginator [length]="length"
-              [pageSize]="pageSize"
-              [pageSizeOptions]="pageSizeOptions"
-              [showFirstLastButtons]="true"
-              (page)="changePaginator($event)">
-</mat-paginator>
+  <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" [showFirstLastButtons]="true"
+    (page)="changePaginator($event)">
+  </mat-paginator>
 </div>
 <br>
 <a mat-raised-button routerLink=".">Add new function</a>

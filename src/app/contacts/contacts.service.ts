@@ -27,12 +27,6 @@ export class ContactsService {
 
 
   search(filter: ContactFilter, page: number, perPage: number): Observable<any> {
-    const s = new URLSearchParams();
-
-    console.log(filter);
-
-    s.set('pag', page.toString());
-
     return this.http.post<any>(`${this.contactsUrl}/filter?pag=${page}&perPage=${perPage}`, filter);
   }
 

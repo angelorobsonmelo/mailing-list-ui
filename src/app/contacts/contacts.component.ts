@@ -1,11 +1,12 @@
+import { Category } from './../core/model';
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { ContactsService, ContactFilter } from './contacts.service';
-import { Contact } from '../core/model';
+import { Contact, Function } from '../core/model';
 import { PageEvent } from '@angular/material';
 import { FormControl } from '@angular/forms';
-
-
+import { FunctionService } from '../functions/function.service';
+import { CategoryService } from '../categories/categories.service';
 
 @Component({
   selector: 'app-contacts',
@@ -13,19 +14,22 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./contacts.component.css']
 })
 export class ContactsComponent implements OnInit {
-  
-  length: any;
-  pageSize: any;
-  pageSizeOptions: any[];
 
+  length: number;
+  pageSize: number;
+  pageSizeOptions: number[];
+  functions: Function[];
+  categories: Category[];
   conctactFilter = new ContactFilter();
 
-  constructor(private contactsService: ContactsService) { }
+  constructor(private contactsService: ContactsService, private functionService: FunctionService, private categoryService: CategoryService) { }
 
   dataSource: any;
 
   ngOnInit() {
     this.getContacts();
+    this.getFunctions();
+    this.getCategories();
   }
 
   getContacts(page = 0, pageSize = 25) {
@@ -33,8 +37,6 @@ export class ContactsComponent implements OnInit {
       this.length = response.data.totalElements;
       this.pageSize = response.data.size;
       this.pageSizeOptions = [5, 10, 15, 20, 25];
-
-      console.log(response.data);
 
       let contacts = response.data.content;
       this.dataSource = new MatTableDataSource<Contact>(contacts);
@@ -45,23 +47,31 @@ export class ContactsComponent implements OnInit {
     );
   }
 
+  getFunctions() {
+    this.functionService.getFunctions().subscribe(response => {
+      this.functions = response.data.content;
+      console.log(this.functions);
+    },
+      error => { }
+    )
+  }
+
+  getCategories() {
+    this.categoryService.getFunctions().subscribe(response => {
+      this.categories = response.data.content;
+    },
+      error => {
+
+      }
+    )
+  }
+
   changePaginator(event: PageEvent) {
     this.getContacts(event.pageIndex, event.pageSize)
   }
 
-  foods = [
-    {value: 'steak-0', viewValue: 'Steak'},
-    {value: 'pizza-1', viewValue: 'Pizza'},
-    {value: 'tacos-2', viewValue: 'Tacos'}
-  ];
+  genders = ['MALE', 'FEMALE'];
 
-  toppings = new FormControl();
-
-  functionList = [
-    {'id': 1, 'function': 'modelo de stories'}, 
-    {'id': 2, 'function': 'modelo'}, 
-  ];
-  
   displayedColumns = ['username Instagram', 'category', 'gender', 'functions', 'inserted by', 'actions'];
 
 }
