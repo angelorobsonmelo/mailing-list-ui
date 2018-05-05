@@ -10,8 +10,7 @@ export class TokenStorage {
   constructor() { }
 
   signOut() {
-    window.sessionStorage.removeItem(TOKEN_KEY);
-    window.sessionStorage.clear();
+    localStorage.clear();
   }
 
   public saveRawToken(token: string) {
@@ -23,9 +22,7 @@ export class TokenStorage {
   }
 
   public getToken(): string {
-    console.log("está chamando o get token");
     let token = localStorage.getItem(TOKEN_KEY);
-    console.log(token);
     return token;
   }
 

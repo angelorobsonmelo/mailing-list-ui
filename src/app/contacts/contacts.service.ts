@@ -23,8 +23,8 @@ export class ContactsService {
 
   contactsUrl = `${environment.apiUrl}/contacts`;
 
-  constructor(public http: HttpClient) { }
-
+  constructor(public http: HttpClient) {
+  }
 
   search(filter: ContactFilter, page: number, perPage: number): Observable<any> {
     return this.http.post<any>(`${this.contactsUrl}/filter?pag=${page}&perPage=${perPage}`, filter);
