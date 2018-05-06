@@ -11,6 +11,7 @@ import { TokenInterceptor } from '../auth/TokenInterceptor';
 import { HttpClient } from '@angular/common/http';
 import { FunctionService } from '../functions/function.service';
 import { CategoryService } from '../categories/categories.service';
+import { SaveContactComponent } from './save-contact/save-contact.component';
 
 
 @NgModule({
@@ -21,7 +22,7 @@ import { CategoryService } from '../categories/categories.service';
     HttpClientModule,
     FormsModule,
   ],
-  declarations: [ContactsComponent],
+  declarations: [ContactsComponent, SaveContactComponent],
   providers: [
     ContactsService,
     FunctionService,
@@ -33,5 +34,9 @@ import { CategoryService } from '../categories/categories.service';
       multi: true
     }
   ],
+  
+  entryComponents: [
+    SaveContactComponent
+]
 })
 export class ContactsModule { }

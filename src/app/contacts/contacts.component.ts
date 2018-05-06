@@ -1,3 +1,4 @@
+import { SaveContactComponent } from './save-contact/save-contact.component';
 import { Category } from './../core/model';
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
@@ -7,6 +8,8 @@ import { PageEvent } from '@angular/material';
 import { FormControl } from '@angular/forms';
 import { FunctionService } from '../functions/function.service';
 import { CategoryService } from '../categories/categories.service';
+import { MatDialog, MatDialogConfig } from "@angular/material";
+
 
 @Component({
   selector: 'app-contacts',
@@ -21,10 +24,10 @@ export class ContactsComponent implements OnInit {
   functions: Function[];
   categories: Category[];
   conctactFilter = new ContactFilter();
-
-  constructor(private contactsService: ContactsService, private functionService: FunctionService, private categoryService: CategoryService) { }
-
   dataSource: any;
+
+  constructor(private contactsService: ContactsService, private functionService: FunctionService, private categoryService: CategoryService,
+    private dialog: MatDialog) { }
 
   ngOnInit() {
     this.getContacts();
@@ -64,6 +67,17 @@ export class ContactsComponent implements OnInit {
 
       }
     )
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(SaveContactComponent, {
+      width: 'auto',
+      height: 'auto'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 
   changePaginator(event: PageEvent) {
