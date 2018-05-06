@@ -1,15 +1,13 @@
 import { SaveContactComponent } from './save-contact/save-contact.component';
-import { Category } from './../core/model';
+import { Category, ContactSave, Function, Contact } from './../core/model';
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { ContactsService, ContactFilter } from './contacts.service';
-import { Contact, Function } from '../core/model';
 import { PageEvent } from '@angular/material';
 import { FormControl } from '@angular/forms';
 import { FunctionService } from '../functions/function.service';
 import { CategoryService } from '../categories/categories.service';
 import { MatDialog, MatDialogConfig } from "@angular/material";
-
 
 @Component({
   selector: 'app-contacts',
@@ -21,10 +19,15 @@ export class ContactsComponent implements OnInit {
   length: number;
   pageSize: number;
   pageSizeOptions: number[];
+  curentPage: number;
+  currentPageSize: number;
   functions: Function[];
   categories: Category[];
   conctactFilter = new ContactFilter();
   dataSource: any;
+  contact = new ContactSave();
+  genders = ['MALE', 'FEMALE'];
+  displayedColumns = ['username Instagram', 'category', 'gender', 'functions', 'inserted by', 'actions'];
 
   constructor(private contactsService: ContactsService, private functionService: FunctionService, private categoryService: CategoryService,
     private dialog: MatDialog) { }
@@ -60,33 +63,59 @@ export class ContactsComponent implements OnInit {
   }
 
   getCategories() {
-    this.categoryService.getFunctions().subscribe(response => {
+    this.categoryService.getCategories().subscribe(response => {
       this.categories = response.data.content;
     },
       error => {
-
+        console.log(error);
       }
     )
   }
 
   openDialog() {
-    const dialogRef = this.dialog.open(SaveContactComponent, {
-      width: 'auto',
-      height: 'auto'
-    });
+    let dialogConfig = this.configDialog();
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
+    const dialogRef = this.dialog.open(SaveContactComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(
+      data => {
+        if (data != 'closed') {
+          this.save(data);
+          this.openDialog();
+          return;
+        }
+
+      }
+    );
+
+  }
+
+  configDialog(): MatDialogConfig  {
+    const dialogConfig =  new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = this.contact;
+    dialogConfig.height = 'auto';
+    dialogConfig.width = '600px';
+
+    return dialogConfig;
+  }
+
+  save(contactSave: ContactSave) {
+    this.contactsService.save(contactSave).subscribe(response => {
+      this.getContacts(this.curentPage, this.currentPageSize);
+      console.log("salvou");
+    },
+      error => {
+
+      })
   }
 
   changePaginator(event: PageEvent) {
-    this.getContacts(event.pageIndex, event.pageSize)
+    this.curentPage = event.pageIndex;
+    this.currentPageSize = event.pageSize;
+    this.getContacts(this.curentPage, this.currentPageSize)
   }
-
-  genders = ['MALE', 'FEMALE'];
-
-  displayedColumns = ['username Instagram', 'category', 'gender', 'functions', 'inserted by', 'actions'];
 
 }
 

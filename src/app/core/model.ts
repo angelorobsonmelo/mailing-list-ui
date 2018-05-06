@@ -27,3 +27,12 @@ export class Contact {
     gender: string;
     registrationDate: Date
 }
+
+export class ContactSave {
+    userNameInstagram: string;
+    categoryId: number;
+    functionsIds: number [];
+    gender: string;
+    registrationDate: Date
+    userAppId: number;
+}

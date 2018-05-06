@@ -1,17 +1,42 @@
-<h2 mat-dialog-title>Description</h2>
+<h2 mat-dialog-title> Save Contact</h2>
 
-<mat-dialog-content>
-  
-    <mat-form-field class="col-12">
-        <input matInput
-                placeholder="Course Description"
-               >
-    </mat-form-field>
-      ....
- 
-</mat-dialog-content>
+<form autocomplete="off" #f=ngForm>
 
-<mat-dialog-actions>
-    <button class="mat-raised-button">Close</button>
-    <button class="mat-raised-button mat-primary">Save</button>
-</mat-dialog-actions>
+    <mat-dialog-content>
+
+        <mat-form-field class="col-12">
+            <input matInput placeholder="Username Instagram" name="userNameInstagram" [(ngModel)]="contactSave.userNameInstagram">
+        </mat-form-field>
+
+        <mat-form-field class="col-12">
+            <mat-select placeholder="Category" name="category" [(ngModel)]="contactSave.categoryId">
+                <mat-option [value]="" selected>None</mat-option>
+                <mat-option *ngFor="let category of categories" [value]="category.id">
+                    {{ category.category }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="col-12">
+            <mat-select placeholder="Gender" name="gender" [(ngModel)]="contactSave.gender">
+                <mat-option [value]="" selected>None</mat-option>
+                <mat-option *ngFor="let gender of genders" [value]="gender">
+                    {{ gender }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="col-12">
+            <mat-select placeholder="Functions" multiple name="functions" [(ngModel)]="contactSave.functionsIds">
+                <mat-option *ngFor="let function of functions" [value]="function.id">{{function.function}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+    </mat-dialog-content>
+
+    <mat-dialog-actions>
+        <button mat-button mat-dialog-close class="mat-raised-button" (click)="close()">Close</button>
+        <button class="mat-raised-button mat-primary" (click)="save()">Save</button>
+    </mat-dialog-actions>
+
+</form>
