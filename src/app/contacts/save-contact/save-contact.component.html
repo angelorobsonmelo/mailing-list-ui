@@ -9,8 +9,7 @@
         </mat-form-field>
 
         <mat-form-field class="col-12">
-            <mat-select placeholder="Category" name="category" [(ngModel)]="contact.category">
-                <mat-option [value]="" selected>None</mat-option>
+            <mat-select placeholder="Category" name="category" [compareWith]="compareFn" [(ngModel)]="contact.category">
                 <mat-option *ngFor="let category of categories" [value]="category">
                     {{ category.category }}
                 </mat-option>
@@ -18,7 +17,7 @@
         </mat-form-field>
 
         <mat-form-field class="col-12">
-            <mat-select placeholder="Gender" name="gender" [(ngModel)]="contact.gender">
+            <mat-select placeholder="Gender" name="gender"  [(ngModel)]="contact.gender">
                 <mat-option [value]="" selected>None</mat-option>
                 <mat-option *ngFor="let gender of genders" [value]="gender">
                     {{ gender }}
@@ -27,7 +26,7 @@
         </mat-form-field>
 
         <mat-form-field class="col-12">
-            <mat-select placeholder="Functions" multiple name="functions" [(ngModel)]="contact.functions">
+            <mat-select placeholder="Functions" multiple [compareWith]="compareFn" name="functions" [(ngModel)]="contact.functions">
                 <mat-option *ngFor="let function of functions" [value]="function">{{function.function}}</mat-option>
             </mat-select>
         </mat-form-field>

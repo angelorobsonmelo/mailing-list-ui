@@ -57,7 +57,6 @@ export class ContactsComponent implements OnInit {
   getFunctions() {
     this.functionService.getFunctions().subscribe(response => {
       this.functions = response.data.content;
-      console.log(this.functions);
     },
       error => { }
     )

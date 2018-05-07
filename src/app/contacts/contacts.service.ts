@@ -44,12 +44,10 @@ export class ContactsService {
   }
 
   findById(id: number): Observable<any> {
-    console.log(id);
     return this.http.get<any>(`${this.contactsUrl}/${id}`);
   }
 
   delete(id: number): Observable<any> {
-    console.log(id);
     return this.http.delete<any>(`${this.contactsUrl}/${id}`);
   }
 

@@ -1,7 +1,7 @@
 import { FunctionService } from './../../functions/function.service';
 import { CategoryService } from './../../categories/categories.service';
 import { ContactsService } from './../contacts.service';
-import { ContactSave, Category, Contact } from './../../core/model';
+import { ContactSave, Category, Contact, Function } from './../../core/model';
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
 
@@ -40,6 +40,10 @@ export class SaveContactComponent implements OnInit {
 
         })
     }
+  }
+
+  compareFn(obj1: any, obj2: any) {
+    return obj1 && obj2 ? obj1.id === obj2.id : obj1 === obj2;
   }
 
   getCategories() {
