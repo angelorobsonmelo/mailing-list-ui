@@ -69,9 +69,8 @@ export class SaveContactComponent implements OnInit {
   }
 
   converterContactToContactSave(contact: Contact): ContactSave {
-    console.log(this.contactSaveId);
     let contactSave = new ContactSave();
-    contactSave.id = contact.category.id;
+    contactSave.id = contact.id;
     contactSave.categoryId = contact.category.id;
     contactSave.functionsIds = contact.functions.map(item => item.id);
     contactSave.gender = contact.gender;

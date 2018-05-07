@@ -74,6 +74,7 @@ export class ContactsComponent implements OnInit {
   }
 
   openDialog() {
+    this.contact.id = null;
     let dialogConfig = this.configDialog();
 
     const dialogRef = this.dialog.open(SaveContactComponent, dialogConfig);
@@ -100,7 +101,6 @@ export class ContactsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(
       data => {
         if (data != 'closed') {
-          console.log(data);
           this.update(data);
           this.openDialog();
           return;
