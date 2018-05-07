@@ -100,7 +100,8 @@ export class ContactsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(
       data => {
         if (data != 'closed') {
-          this.save(data);
+          console.log(data);
+          this.update(data);
           this.openDialog();
           return;
         }
@@ -160,6 +161,16 @@ export class ContactsComponent implements OnInit {
 
   save(contactSave: ContactSave) {
     this.contactsService.save(contactSave).subscribe(response => {
+      this.getContacts(this.curentPage, this.currentPageSize);
+      console.log("salvou");
+    },
+      error => {
+
+      })
+  }
+
+  update(contactSave: ContactSave) {
+    this.contactsService.update(contactSave).subscribe(response => {
       this.getContacts(this.curentPage, this.currentPageSize);
       console.log("salvou");
     },

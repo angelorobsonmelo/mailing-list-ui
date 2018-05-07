@@ -27,15 +27,18 @@ export class SaveContactComponent implements OnInit {
   ngOnInit() {
     this.getCategories();
     this.getFunctions();
+    this.findById(this.contactSaveId);
+  }
 
-    if (this.contactSaveId) {
-      this.contactService.findById(this.contactSaveId).subscribe(response => {
+  findById(id: number) {
+    if (id) {
+      this.contactService.findById(id).subscribe(response => {
         this.contact = response.data;
+        console.log(this.contact);
       },
         error => {
 
         })
-
     }
   }
 
@@ -62,6 +65,7 @@ export class SaveContactComponent implements OnInit {
 
     this.dialogRef.close(ContactSave);
     this.contact = new Contact();
+    this.contactSaveId = null;
   }
 
   converterContactToContactSave(contact: Contact): ContactSave {

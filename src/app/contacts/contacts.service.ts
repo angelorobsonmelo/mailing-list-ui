@@ -39,6 +39,10 @@ export class ContactsService {
     return this.http.post<any>(this.contactsUrl, contactSave);
   }
 
+  update(contactSave: ContactSave): Observable<any> {
+    return this.http.put<any>(`${this.contactsUrl}/${contactSave.id}`, contactSave);
+  }
+
   findById(id: number): Observable<any> {
     console.log(id);
     return this.http.get<any>(`${this.contactsUrl}/${id}`);
