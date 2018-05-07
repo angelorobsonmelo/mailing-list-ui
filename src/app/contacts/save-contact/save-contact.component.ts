@@ -38,7 +38,6 @@ export class SaveContactComponent implements OnInit {
   getFunctions() {
     this.functionService.getFunctions().subscribe(response => {
       this.functions = response.data.content;
-      console.log(this.functions);
     },
       error => { }
     )
@@ -51,7 +50,6 @@ export class SaveContactComponent implements OnInit {
 
   close() {
     this.dialogRef.close('closed');
-    this.contactSave = new ContactSave();
   }
 
 }
