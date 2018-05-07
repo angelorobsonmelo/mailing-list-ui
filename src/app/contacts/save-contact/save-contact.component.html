@@ -5,20 +5,20 @@
     <mat-dialog-content>
 
         <mat-form-field class="col-12">
-            <input matInput placeholder="Username Instagram" name="userNameInstagram" [(ngModel)]="contactSave.userNameInstagram">
+            <input matInput placeholder="Username Instagram" name="userNameInstagram" [(ngModel)]="contact.userNameInstagram">
         </mat-form-field>
 
         <mat-form-field class="col-12">
-            <mat-select placeholder="Category" name="category" [(ngModel)]="contactSave.categoryId">
+            <mat-select placeholder="Category" name="category" [(ngModel)]="contact.category">
                 <mat-option [value]="" selected>None</mat-option>
-                <mat-option *ngFor="let category of categories" [value]="category.id">
+                <mat-option *ngFor="let category of categories" [value]="category">
                     {{ category.category }}
                 </mat-option>
             </mat-select>
         </mat-form-field>
 
         <mat-form-field class="col-12">
-            <mat-select placeholder="Gender" name="gender" [(ngModel)]="contactSave.gender">
+            <mat-select placeholder="Gender" name="gender" [(ngModel)]="contact.gender">
                 <mat-option [value]="" selected>None</mat-option>
                 <mat-option *ngFor="let gender of genders" [value]="gender">
                     {{ gender }}
@@ -27,8 +27,8 @@
         </mat-form-field>
 
         <mat-form-field class="col-12">
-            <mat-select placeholder="Functions" multiple name="functions" [(ngModel)]="contactSave.functionsIds">
-                <mat-option *ngFor="let function of functions" [value]="function.id">{{function.function}}</mat-option>
+            <mat-select placeholder="Functions" multiple name="functions" [(ngModel)]="contact.functions">
+                <mat-option *ngFor="let function of functions" [value]="function">{{function.function}}</mat-option>
             </mat-select>
         </mat-form-field>
 

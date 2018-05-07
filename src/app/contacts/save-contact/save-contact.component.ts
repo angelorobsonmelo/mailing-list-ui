@@ -1,7 +1,7 @@
 import { FunctionService } from './../../functions/function.service';
 import { CategoryService } from './../../categories/categories.service';
 import { ContactsService } from './../contacts.service';
-import { ContactSave, Category } from './../../core/model';
+import { ContactSave, Category, Contact } from './../../core/model';
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
 
@@ -12,7 +12,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
 })
 export class SaveContactComponent implements OnInit {
 
-  contactSave = new ContactSave();
+  contact = new Contact();
   categories: Category[];
   functions: Function[];
   genders = ['MALE', 'FEMALE'];
@@ -44,8 +44,20 @@ export class SaveContactComponent implements OnInit {
   }
 
   save() {
-    this.dialogRef.close(this.contactSave);
-    this.contactSave = new ContactSave();
+    let ContactSave = this.converterContactToContactSave(this.contact);
+
+    this.dialogRef.close(ContactSave);
+    this.contact = new Contact();
+  }
+
+  converterContactToContactSave(contact: Contact): ContactSave {
+    let contactSave = new ContactSave();
+    contactSave.categoryId = contact.category.id;
+    contactSave.functionsIds = contact.functions.map(item => item.id);
+    contactSave.gender = contact.gender;
+    contactSave.userNameInstagram = contact.userNameInstagram;
+
+    return contactSave;
   }
 
   close() {

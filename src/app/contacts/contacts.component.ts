@@ -91,7 +91,7 @@ export class ContactsComponent implements OnInit {
   }
 
   configDialog(): MatDialogConfig {
-    const dialogConfig = new MatDialogConfig();
+    let dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.data = this.contact;
