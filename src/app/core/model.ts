@@ -29,6 +29,7 @@ export class Contact {
 }
 
 export class ContactSave {
+    id: number;
     userNameInstagram: string;
     categoryId: number;
     functionsIds: number [];

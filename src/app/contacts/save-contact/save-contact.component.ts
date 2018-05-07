@@ -15,14 +15,28 @@ export class SaveContactComponent implements OnInit {
   contact = new Contact();
   categories: Category[];
   functions: Function[];
+  contactSaveId: number;
   genders = ['MALE', 'FEMALE'];
 
   constructor(private dialogRef: MatDialogRef<SaveContactComponent>,
-    @Inject(MAT_DIALOG_DATA) data, private categoryService: CategoryService, private functionService: FunctionService) { }
+    @Inject(MAT_DIALOG_DATA) data, private categoryService: CategoryService, private functionService: FunctionService,
+    private contactService: ContactsService) {
+    this.contactSaveId = data.id;
+  }
 
   ngOnInit() {
     this.getCategories();
     this.getFunctions();
+
+    if (this.contactSaveId) {
+      this.contactService.findById(this.contactSaveId).subscribe(response => {
+        this.contact = response.data;
+      },
+        error => {
+
+        })
+
+    }
   }
 
   getCategories() {
@@ -51,7 +65,9 @@ export class SaveContactComponent implements OnInit {
   }
 
   converterContactToContactSave(contact: Contact): ContactSave {
+    console.log(this.contactSaveId);
     let contactSave = new ContactSave();
+    contactSave.id = contact.category.id;
     contactSave.categoryId = contact.category.id;
     contactSave.functionsIds = contact.functions.map(item => item.id);
     contactSave.gender = contact.gender;

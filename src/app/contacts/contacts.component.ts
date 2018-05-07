@@ -8,6 +8,7 @@ import { FormControl } from '@angular/forms';
 import { FunctionService } from '../functions/function.service';
 import { CategoryService } from '../categories/categories.service';
 import { MatDialog, MatDialogConfig } from "@angular/material";
+import { RemoveContactComponent } from './remove-contact/remove-contact.component';
 
 @Component({
   selector: 'app-contacts',
@@ -88,6 +89,62 @@ export class ContactsComponent implements OnInit {
       }
     );
 
+  }
+
+  edit(id: number) {
+    let dialogConfig = this.configDialog();
+    this.contact.id = id;
+
+    const dialogRef = this.dialog.open(SaveContactComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(
+      data => {
+        if (data != 'closed') {
+          this.save(data);
+          this.openDialog();
+          return;
+        }
+
+      }
+    );
+
+  }
+
+  remove(id: number) {
+    this.contact.id = id;
+    let dialogConfig = this.configRemoveDialog();
+
+    const dialogRef = this.dialog.open(RemoveContactComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(
+      data => {
+        if (data) {
+          this.delete(data);
+        }
+      }
+    );
+  }
+
+  configRemoveDialog(): MatDialogConfig {
+    let dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = this.contact.id;
+    dialogConfig.height = 'auto';
+    dialogConfig.width = '600px';
+
+    return dialogConfig;
+  }
+
+  delete(id: number) {
+    this.contactsService.delete(id).subscribe(response => {
+      console.log('removido com sucesso');
+      this.getContacts(this.curentPage, this.currentPageSize);
+    },
+      error => {
+
+      }
+    )
   }
 
   configDialog(): MatDialogConfig {

@@ -12,6 +12,7 @@ import { HttpClient } from '@angular/common/http';
 import { FunctionService } from '../functions/function.service';
 import { CategoryService } from '../categories/categories.service';
 import { SaveContactComponent } from './save-contact/save-contact.component';
+import { RemoveContactComponent } from './remove-contact/remove-contact.component';
 
 
 @NgModule({
@@ -22,7 +23,7 @@ import { SaveContactComponent } from './save-contact/save-contact.component';
     HttpClientModule,
     FormsModule,
   ],
-  declarations: [ContactsComponent, SaveContactComponent],
+  declarations: [ContactsComponent, SaveContactComponent, RemoveContactComponent],
   providers: [
     ContactsService,
     FunctionService,
@@ -36,7 +37,8 @@ import { SaveContactComponent } from './save-contact/save-contact.component';
   ],
   
   entryComponents: [
-    SaveContactComponent
+    SaveContactComponent,
+    RemoveContactComponent
 ]
 })
 export class ContactsModule { }
