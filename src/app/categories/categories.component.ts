@@ -45,6 +45,12 @@ export class CategoriesComponent implements OnInit {
       })
   }
 
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); 
+    filterValue = filterValue.toLowerCase();
+    this.dataSource.filter = filterValue;
+  }
+
   changePaginator(event: PageEvent) {
     this.curentPage = event.pageIndex;
     this.currentPageSize = event.pageSize;
