@@ -9,6 +9,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import { CategoriesRoutingModule } from './categories-routing.module';
 import { SaveCategoryComponent } from './save-category/save-category.component';
+import { RemoveCategoryComponent } from './remove-category/remove-category.component';
 
 
 @NgModule({
@@ -19,7 +20,7 @@ import { SaveCategoryComponent } from './save-category/save-category.component';
     FormsModule,
     CategoriesRoutingModule
   ],
-  declarations: [CategoriesComponent, SaveCategoryComponent],
+  declarations: [CategoriesComponent, SaveCategoryComponent, RemoveCategoryComponent],
   providers: [
     CategoryService,
     HttpClient,
@@ -30,7 +31,8 @@ import { SaveCategoryComponent } from './save-category/save-category.component';
     }
   ],
   entryComponents: [
-    SaveCategoryComponent
+    SaveCategoryComponent,
+    RemoveCategoryComponent
   ]
 })
 export class CategoriesModule { }

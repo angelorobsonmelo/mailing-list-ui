@@ -9,6 +9,7 @@ import { FormControl } from '@angular/forms';
 import { FunctionService } from '../functions/function.service';
 import { MatDialog, MatDialogConfig } from "@angular/material";
 import { SaveCategoryComponent } from './save-category/save-category.component';
+import { RemoveCategoryComponent } from './remove-category/remove-category.component';
 
 @Component({
   selector: 'app-categories',
@@ -115,6 +116,41 @@ export class CategoriesComponent implements OnInit {
       }
     );
 
+  }
+
+  remove(category: Category) {
+    let dialogConfig = this.configRemoveDialog(category);
+
+    const dialogRef = this.dialog.open(RemoveCategoryComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(
+      data => {
+        if (data) {
+          this.delete(data.id);
+        }
+      }
+    );
+  }
+
+  configRemoveDialog(category: Category): MatDialogConfig {
+    let dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = category;
+    dialogConfig.height = 'auto';
+    dialogConfig.width = '600px';
+
+    return dialogConfig;
+  }
+
+  delete(id: number) {
+    this.categoryService.delete(id).subscribe(response => {
+      this.getCategoriesPageable(this.curentPage, this.currentPageSize);
+    },
+      error => {
+
+      }
+    )
   }
 
   update(category: Category) {
