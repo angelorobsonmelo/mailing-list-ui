@@ -17,6 +17,10 @@ const routes: Routes = [
     path: 'contacts',
     loadChildren: 'app/contacts/contacts.module#ContactsModule'
   },
+  {
+    path: 'categories',
+    loadChildren: 'app/categories/categories.module#CategoriesModule'
+  },
 
   { path: '**', redirectTo: '/login' }
 
