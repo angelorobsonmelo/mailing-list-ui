@@ -1,3 +1,4 @@
+import { Contact } from './../../core/model';
 import { ContactsService } from './../contacts.service';
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
@@ -9,19 +10,19 @@ import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
 })
 export class RemoveContactComponent implements OnInit {
 
-  contactId: number;
+  contact: Contact;
 
   constructor(private dialogRef: MatDialogRef<RemoveContactComponent>,
     @Inject(MAT_DIALOG_DATA) data,
     private contactService: ContactsService) {
-    this.contactId = data;
+    this.contact = data;
   }
 
   ngOnInit() {
   }
 
   remove() {
-    this.dialogRef.close(this.contactId);
+    this.dialogRef.close(this.contact.id);
   }
 
   close() {

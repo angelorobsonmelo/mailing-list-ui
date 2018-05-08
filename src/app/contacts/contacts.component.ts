@@ -110,26 +110,25 @@ export class ContactsComponent implements OnInit {
 
   }
 
-  remove(id: number) {
-    this.contact.id = id;
-    let dialogConfig = this.configRemoveDialog();
+  remove(contact: Contact) {
+    let dialogConfig = this.configRemoveDialog(contact);
 
     const dialogRef = this.dialog.open(RemoveContactComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(
       data => {
         if (data) {
-          this.delete(data);
+          this.delete(data.id);
         }
       }
     );
   }
 
-  configRemoveDialog(): MatDialogConfig {
+  configRemoveDialog(contact: Contact): MatDialogConfig {
     let dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.data = this.contact.id;
+    dialogConfig.data = contact;
     dialogConfig.height = 'auto';
     dialogConfig.width = '600px';
 
