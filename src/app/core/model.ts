@@ -10,7 +10,7 @@ export class Category {
 
 export class Function {
     id: number;
-    category: string;
+    function: string;
 }
 
 export class UserApp {

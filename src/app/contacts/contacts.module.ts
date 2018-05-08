@@ -9,7 +9,7 @@ import { ContactsService } from './contacts.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { TokenInterceptor } from '../auth/TokenInterceptor';
 import { HttpClient } from '@angular/common/http';
-import { FunctionService } from '../functions/function.service';
+import { FunctionService } from '../functions/functions.service';
 import { CategoryService } from '../categories/categories.service';
 import { SaveContactComponent } from './save-contact/save-contact.component';
 import { RemoveContactComponent } from './remove-contact/remove-contact.component';

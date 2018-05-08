@@ -20,4 +20,20 @@ export class FunctionService {
     return this.http.get<any>(`${this.functionsUrl}?pag=${page}&perPage=${pageSize}`);
   }
 
+  save(func: Function): Observable<any> {
+    return this.http.post<any>(this.functionsUrl, func);
+  }
+
+  update(func: Function): Observable<any> {
+    return this.http.put<any>(`${this.functionsUrl}/${func.id}`, func);
+  }
+
+  findById(id: number): Observable<any> {
+    return this.http.get<any>(`${this.functionsUrl}/${id}`);
+  }
+
+  delete(id: number): Observable<any> {
+    return this.http.delete<any>(`${this.functionsUrl}/${id}`);
+  }
+
 }

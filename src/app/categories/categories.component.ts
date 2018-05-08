@@ -6,7 +6,7 @@ import { ViewChild } from '@angular/core';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { PageEvent } from '@angular/material';
 import { FormControl } from '@angular/forms';
-import { FunctionService } from '../functions/function.service';
+import { FunctionService } from '../functions/functions.service';
 import { MatDialog, MatDialogConfig } from "@angular/material";
 import { SaveCategoryComponent } from './save-category/save-category.component';
 import { RemoveCategoryComponent } from './remove-category/remove-category.component';

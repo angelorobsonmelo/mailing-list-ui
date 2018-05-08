@@ -1,4 +1,4 @@
-import { FunctionService } from './../../functions/function.service';
+import { FunctionService } from './../../functions/functions.service';
 import { CategoryService } from './../../categories/categories.service';
 import { ContactsService } from './../contacts.service';
 import { ContactSave, Category, Contact, Function } from './../../core/model';

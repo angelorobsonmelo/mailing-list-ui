@@ -5,7 +5,7 @@ import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { ContactsService, ContactFilter } from './contacts.service';
 import { PageEvent } from '@angular/material';
 import { FormControl } from '@angular/forms';
-import { FunctionService } from '../functions/function.service';
+import { FunctionService } from '../functions/functions.service';
 import { CategoryService } from '../categories/categories.service';
 import { MatDialog, MatDialogConfig } from "@angular/material";
 import { RemoveContactComponent } from './remove-contact/remove-contact.component';
