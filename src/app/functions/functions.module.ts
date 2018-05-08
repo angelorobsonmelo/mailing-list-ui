@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { TokenInterceptor } from '../auth/TokenInterceptor';
 import { HttpClient } from '@angular/common/http';
 import { SaveFunctionComponent } from './save-function/save-function.component';
+import { RemoveFunctionComponent } from './remove-function/remove-function.component';
 
 
 @NgModule({
@@ -29,9 +30,10 @@ import { SaveFunctionComponent } from './save-function/save-function.component';
       multi: true
     }
   ],
-  declarations: [FunctionsComponent, SaveFunctionComponent],
+  declarations: [FunctionsComponent, SaveFunctionComponent, RemoveFunctionComponent],
   entryComponents: [
     SaveFunctionComponent,
+    RemoveFunctionComponent
   ]
 })
 export class FunctionsModule { }

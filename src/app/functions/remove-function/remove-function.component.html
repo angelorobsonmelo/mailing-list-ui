@@ -1,0 +1,6 @@
+<h2 mat-dialog-title>Delete function {{function.function}}</h2>
+<mat-dialog-content>Are you sure?</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button mat-dialog-close>No</button>
+  <button mat-raised-button color="warn" [mat-dialog-close]="function">Yes</button>
+</mat-dialog-actions>

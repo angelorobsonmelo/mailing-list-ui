@@ -8,6 +8,7 @@ import { FunctionService } from './functions.service';
 import { PageEvent } from '@angular/material';
 import { FormControl } from '@angular/forms';
 import { SaveFunctionComponent } from './save-function/save-function.component';
+import { RemoveFunctionComponent } from './remove-function/remove-function.component';
 
 
 
@@ -30,10 +31,10 @@ export class FunctionsComponent implements OnInit {
   constructor(private dialog: MatDialog, private functionService: FunctionService) { }
 
   ngOnInit() {
-    this.getCategoriesPageable();
+    this.getFunctionsPageable();
   }
 
-  getCategoriesPageable(page = 0, pageSize = 50) {
+  getFunctionsPageable(page = 0, pageSize = 50) {
     this.functionService.getCategoriesPageable(page, pageSize).subscribe(response => {
       this.length = response.data.totalElements;
       this.pageSize = response.data.size;
@@ -51,6 +52,25 @@ export class FunctionsComponent implements OnInit {
     filterValue = filterValue.trim();
     filterValue = filterValue.toLowerCase();
     this.dataSource.filter = filterValue;
+  }
+
+  edit(id: number) {
+    let dialogConfig = this.configDialog();
+    this.function.id = id;
+
+    const dialogRef = this.dialog.open(SaveFunctionComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(
+      data => {
+        if (data != 'closed') {
+          this.update(data);
+          this.openDialog();
+          return;
+        }
+
+      }
+    );
+
   }
 
   openDialog() {
@@ -73,6 +93,15 @@ export class FunctionsComponent implements OnInit {
 
   }
 
+  update(func: Function) {
+    this.functionService.update(func).subscribe(response => {
+      this.getFunctionsPageable(this.curentPage, this.currentPageSize);
+    },
+      error => {
+
+      })
+  }
+
   configDialog(): MatDialogConfig {
     let dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
@@ -86,11 +115,46 @@ export class FunctionsComponent implements OnInit {
 
   save(func: Function) {
     this.functionService.save(func).subscribe(response => {
-      this.getCategoriesPageable(this.curentPage, this.currentPageSize);
+      this.getFunctionsPageable(this.curentPage, this.currentPageSize);
     },
       error => {
 
       })
+  }
+
+  remove(fun: Function) {
+    let dialogConfig = this.configRemoveDialog(fun);
+
+    const dialogRef = this.dialog.open(RemoveFunctionComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(
+      data => {
+        if (data) {
+          this.delete(data.id);
+        }
+      }
+    );
+  }
+
+  configRemoveDialog(func: Function): MatDialogConfig {
+    let dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = func;
+    dialogConfig.height = 'auto';
+    dialogConfig.width = '600px';
+
+    return dialogConfig;
+  }
+
+  delete(id: number) {
+    this.functionService.delete(id).subscribe(response => {
+      this.getFunctionsPageable(this.curentPage, this.currentPageSize);
+    },
+      error => {
+
+      }
+    )
   }
 
 }
