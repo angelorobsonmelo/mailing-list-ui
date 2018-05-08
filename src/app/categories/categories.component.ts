@@ -8,6 +8,7 @@ import { PageEvent } from '@angular/material';
 import { FormControl } from '@angular/forms';
 import { FunctionService } from '../functions/function.service';
 import { MatDialog, MatDialogConfig } from "@angular/material";
+import { SaveCategoryComponent } from './save-category/save-category.component';
 
 @Component({
   selector: 'app-categories',
@@ -25,7 +26,7 @@ export class CategoriesComponent implements OnInit {
   displayedColumns = ['category', 'actions'];
   category = new Category();
 
-  constructor(private categoryService: CategoryService) { }
+  constructor(private categoryService: CategoryService, private dialog: MatDialog) { }
 
   ngOnInit() {
     this.getCategoriesPageable();
@@ -46,7 +47,7 @@ export class CategoriesComponent implements OnInit {
   }
 
   applyFilter(filterValue: string) {
-    filterValue = filterValue.trim(); 
+    filterValue = filterValue.trim();
     filterValue = filterValue.toLowerCase();
     this.dataSource.filter = filterValue;
   }
@@ -55,6 +56,74 @@ export class CategoriesComponent implements OnInit {
     this.curentPage = event.pageIndex;
     this.currentPageSize = event.pageSize;
     this.getCategoriesPageable(this.curentPage, this.currentPageSize)
+  }
+
+  openDialog() {
+    this.category.id = null;
+    let dialogConfig = this.configDialog();
+
+    const dialogRef = this.dialog.open(SaveCategoryComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(
+      data => {
+        if (data != 'closed') {
+          this.save(data);
+          console.log(data);
+          this.openDialog();
+          return;
+        }
+
+      }
+    );
+
+  }
+
+  configDialog(): MatDialogConfig {
+    let dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = this.category;
+    dialogConfig.height = 'auto';
+    dialogConfig.width = '600px';
+
+    return dialogConfig;
+  }
+
+  save(category: Category) {
+    this.categoryService.save(category).subscribe(response => {
+      this.getCategoriesPageable(this.curentPage, this.currentPageSize);
+    },
+      error => {
+
+      })
+  }
+
+  edit(id: number) {
+    let dialogConfig = this.configDialog();
+    this.category.id = id;
+
+    const dialogRef = this.dialog.open(SaveCategoryComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(
+      data => {
+        if (data != 'closed') {
+          this.update(data);
+          this.openDialog();
+          return;
+        }
+
+      }
+    );
+
+  }
+
+  update(category: Category) {
+    this.categoryService.update(category).subscribe(response => {
+      this.getCategoriesPageable(this.curentPage, this.currentPageSize);
+    },
+      error => {
+
+      })
   }
 
 }

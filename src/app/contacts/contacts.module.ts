@@ -35,10 +35,9 @@ import { RemoveContactComponent } from './remove-contact/remove-contact.componen
       multi: true
     }
   ],
-  
   entryComponents: [
     SaveContactComponent,
     RemoveContactComponent
-]
+  ]
 })
 export class ContactsModule { }

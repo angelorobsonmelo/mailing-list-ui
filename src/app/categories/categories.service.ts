@@ -1,4 +1,4 @@
-import { Function } from './../core/model';
+import { Function, Category } from './../core/model';
 import { Injectable } from '@angular/core';
 import { environment } from './../../environments/environment';
 import { HttpClient } from '@angular/common/http';
@@ -18,6 +18,18 @@ export class CategoryService {
 
   getCategoriesPageable(page: number, pageSize: number): Observable<any> {
     return this.http.get<any>(`${this.categoriesUrl}?pag=${page}&perPage=${pageSize}`);
+  }
+
+  save(category: Category): Observable<any> {
+    return this.http.post<any>(this.categoriesUrl, category);
+  }
+
+  update(category: Category): Observable<any> {
+    return this.http.put<any>(`${this.categoriesUrl}/${category.id}`, category);
+  }
+
+  findById(id: number): Observable<any> {
+    return this.http.get<any>(`${this.categoriesUrl}/${id}`);
   }
 
 }
