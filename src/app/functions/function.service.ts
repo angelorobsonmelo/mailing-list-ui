@@ -16,4 +16,8 @@ export class FunctionService {
     return this.http.get<any>(this.functionsUrl);
   }
 
+  getCategoriesPageable(page: number, pageSize: number): Observable<any> {
+    return this.http.get<any>(`${this.functionsUrl}?pag=${page}&perPage=${pageSize}`);
+  }
+
 }

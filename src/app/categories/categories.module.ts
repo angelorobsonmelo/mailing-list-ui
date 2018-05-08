@@ -11,7 +11,6 @@ import { CategoriesRoutingModule } from './categories-routing.module';
 import { SaveCategoryComponent } from './save-category/save-category.component';
 import { RemoveCategoryComponent } from './remove-category/remove-category.component';
 
-
 @NgModule({
   imports: [
     CommonModule,

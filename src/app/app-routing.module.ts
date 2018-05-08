@@ -21,6 +21,10 @@ const routes: Routes = [
     path: 'categories',
     loadChildren: 'app/categories/categories.module#CategoriesModule'
   },
+  {
+    path: 'functions',
+    loadChildren: 'app/functions/functions.module#FunctionsModule'
+  },
 
   { path: '**', redirectTo: '/login' }
 
