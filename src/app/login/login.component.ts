@@ -11,6 +11,7 @@ import { JwtAuthentication } from '../core/model';
 
 export class LoginComponent implements OnInit {
   jwtAuthentication = new JwtAuthentication();
+  hide = true;
 
   ngOnInit() {
   }
