@@ -12,7 +12,7 @@ import { AuthService } from '../auth/AuthService';
   imports: [
     LoginRoutingModule,
     MaterialModule,
-    CoreModule
+    CoreModule,
   ],
   declarations: [LoginComponent],
   providers: [LoginService, AuthService]

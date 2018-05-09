@@ -5,17 +5,20 @@
     <mat-dialog-content>
 
         <mat-form-field class="col-12">
-            <input matInput placeholder="function" name="function" [(ngModel)]="function.function">
+            <input matInput placeholder="function" name="function" #inputFunction required [(ngModel)]="function.function">
+            <mat-hint align="end">{{inputFunction.value?.length || 0}}/100</mat-hint>
             <button mat-button type="button" *ngIf="function.function" matSuffix mat-icon-button aria-label="Clear" (click)="function.function=''">
                 <mat-icon>close</mat-icon>
             </button>
+
+            <mat-error>Function is required</mat-error>
         </mat-form-field>
 
     </mat-dialog-content>
 
     <mat-dialog-actions>
-        <button mat-button mat-dialog-close class="mat-raised-button" (click)="close()">Close</button>
-        <button class="mat-raised-button mat-primary" (click)="save()">Save</button>
+        <button mat-button mat-dialog-close class="mat-raised-button" type="button" (click)="close()">Close</button>
+        <button class="mat-raised-button mat-primary" [disabled]="!f.valid" (click)="save()">Save</button>
     </mat-dialog-actions>
 
 </form>

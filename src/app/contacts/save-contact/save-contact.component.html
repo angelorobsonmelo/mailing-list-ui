@@ -5,40 +5,48 @@
     <mat-dialog-content>
 
         <mat-form-field class="col-12">
-            <input matInput placeholder="Username Instagram" name="userNameInstagram" [(ngModel)]="contact.userNameInstagram">
+            <input matInput placeholder="Username Instagram" maxlength="50" required #inputUserNameInstagram name="userNameInstagram" [(ngModel)]="contact.userNameInstagram">
+            <mat-hint align="end">{{inputUserNameInstagram.value?.length || 0}}/50</mat-hint>
             <button mat-button type="button" *ngIf="contact.userNameInstagram" matSuffix mat-icon-button aria-label="Clear" (click)="contact.userNameInstagram=''">
                 <mat-icon>close</mat-icon>
             </button>
+            <mat-error>UserNameInstagram is required</mat-error>
         </mat-form-field>
 
         <mat-form-field class="col-12">
-            <mat-select placeholder="Category" name="category" [compareWith]="compareFn" [(ngModel)]="contact.category">
+            <mat-select placeholder="Category" name="category" required [compareWith]="compareFn" [(ngModel)]="contact.category">
                 <mat-option *ngFor="let category of categories" [value]="category">
                     {{ category.category }}
                 </mat-option>
             </mat-select>
+            <mat-error>Category is required</mat-error>
         </mat-form-field>
 
         <mat-form-field class="col-12">
-            <mat-select placeholder="Gender" name="gender" [(ngModel)]="contact.gender">
-                <mat-option [value]="" selected>None</mat-option>
+            <mat-select placeholder="Gender" name="gender" required [(ngModel)]="contact.gender">
                 <mat-option *ngFor="let gender of genders" [value]="gender">
                     {{ gender }}
                 </mat-option>
             </mat-select>
+
+            <mat-error>Gender is required</mat-error>
+
         </mat-form-field>
 
         <mat-form-field class="col-12">
-            <mat-select placeholder="Functions" multiple [compareWith]="compareFn" name="functions" [(ngModel)]="contact.functions">
+            <mat-select placeholder="Functions" multiple required [compareWith]="compareFn" name="functions" [(ngModel)]="contact.functions">
                 <mat-option *ngFor="let function of functions" [value]="function">{{function.function}}</mat-option>
             </mat-select>
+
+            <mat-error>Function is required</mat-error>
+
         </mat-form-field>
 
     </mat-dialog-content>
 
     <mat-dialog-actions>
-        <button mat-button mat-dialog-close class="mat-raised-button" (click)="close()">Close</button>
-        <button class="mat-raised-button mat-primary" (click)="save()">Save</button>
+        <button mat-button mat-dialog-close class="mat-raised-button" type="button" (click)="close()">Close</button>
+        <button class="mat-raised-button mat-primary" (click)="save()" [disabled]="!f.valid">Save</button>
     </mat-dialog-actions>
 
 </form>
