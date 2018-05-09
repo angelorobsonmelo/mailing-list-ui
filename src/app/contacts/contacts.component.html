@@ -1,6 +1,9 @@
 <form autocomplete="off" (ngSubmit)="getContacts()">
   <mat-form-field class="col-2">
     <input matInput placeholder="Username Instagram" name="userNameInstagram" [(ngModel)]="conctactFilter.userNameInstagram">
+    <button mat-button type="button" *ngIf="conctactFilter.userNameInstagram" matSuffix mat-icon-button aria-label="Clear" (click)="conctactFilter.userNameInstagram=''">
+      <mat-icon>close</mat-icon>
+  </button>
   </mat-form-field>
 
   <mat-form-field class="col-2">

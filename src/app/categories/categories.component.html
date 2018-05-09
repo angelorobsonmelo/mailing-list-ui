@@ -1,5 +1,5 @@
 <mat-form-field class="col-3">
-  <input matInput placeholder="Searching category" name="category" (keyup)="applyFilter($event.target.value)">
+  <input matInput placeholder="Searching category" name="category" [(ngModel)]="categoryFilter" (keyup)="applyFilter($event.target.value)">
 </mat-form-field>
 
 &nbsp;&nbsp;
