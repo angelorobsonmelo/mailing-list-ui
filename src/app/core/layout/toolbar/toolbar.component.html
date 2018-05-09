@@ -1,6 +1,8 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <span><img src="./assets/logo.png"></span>
+    <span>
+      <img src="./assets/logo.png">
+    </span>
     <span class="example-fill-remaining-space"></span>
     <span class="align-center"></span>
     <span class="example-spacer"></span>
@@ -8,9 +10,13 @@
     <button mat-button routerLink="contacts">Contacts</button>
     <button mat-button routerLink="functions">Functions</button>
     <button mat-button routerLink="categories">Categories</button>
-    
+    <button mat-button [matMenuTriggerFor]="menu">
+      <mat-icon class="col-4">more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>Settings</button>
+      <button mat-menu-item>Logout</button>
+    </mat-menu>
+
   </mat-toolbar-row>
 </mat-toolbar>
-
-
-
