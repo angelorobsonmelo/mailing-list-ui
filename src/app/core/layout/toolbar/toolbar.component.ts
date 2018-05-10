@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { TokenStorage } from './../../token.storage';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ToolbarComponent implements OnInit {
 
-  constructor() { }
+  tokenStorage = new TokenStorage();
 
-  ngOnInit() {
+  constructor(private router: Router
+  ) { }
+
+  ngOnInit() {}
+
+  signOut() {
+    this.tokenStorage.signOut();
+    this.router.navigate(['/login']);
   }
 
 }

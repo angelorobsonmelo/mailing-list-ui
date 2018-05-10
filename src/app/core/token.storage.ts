@@ -10,7 +10,8 @@ export class TokenStorage {
   constructor() { }
 
   signOut() {
-    localStorage.clear();
+    localStorage.removeItem(TOKEN_KEY);
+    localStorage.removeItem(DECODED_TOKEN_KEY);
   }
 
   public saveRawToken(token: string) {

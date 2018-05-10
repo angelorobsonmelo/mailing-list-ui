@@ -14,8 +14,8 @@
       <mat-icon class="col-4">more_vert</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item>Settings</button>
-      <button mat-menu-item>Logout</button>
+      <button mat-menu-item >Settings</button>
+      <button mat-menu-item (click)="signOut()">Sign Out</button>
     </mat-menu>
 
   </mat-toolbar-row>
