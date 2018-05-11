@@ -18,6 +18,7 @@ export class AuthGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 
+      console.log("aqui também.");
     if (this.auth.isTokenExpired()) {
       console.log('Navegação com access token inválido. Obtendo novo token...');
 

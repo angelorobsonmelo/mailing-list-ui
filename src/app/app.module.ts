@@ -1,3 +1,5 @@
+import { AuthService } from './auth/AuthService';
+import { AuthGuard } from './auth/AuthGuard';
 import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -31,7 +33,7 @@ import { TokenInterceptor } from './auth/TokenInterceptor';
     MaterialModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [AuthGuard, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

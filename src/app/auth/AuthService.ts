@@ -56,7 +56,7 @@ export class AuthService {
 
   isTokenExpired() {
     const token = tokenStorage.getToken();
-
+     console.log(token);
     return !token || helper.isTokenExpired(token);
   }
 

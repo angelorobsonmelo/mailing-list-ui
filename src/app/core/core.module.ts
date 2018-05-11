@@ -5,6 +5,8 @@ import { Title } from '@angular/platform-browser';
 import { ToolbarComponent } from './layout/toolbar/toolbar.component';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
+import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada.component';
+import { NaoAutorizadoComponent } from './nao-autorizado.component';
 
 
 @NgModule({
@@ -17,8 +19,9 @@ import { FormsModule } from '@angular/forms';
   exports: [
     RouterModule,
     HttpModule,
-    FormsModule],
-  declarations: [],
+    FormsModule
+  ],
+  declarations: [PaginaNaoEncontradaComponent, NaoAutorizadoComponent],
   providers: [
     Title,
     { provide: LOCALE_ID, useValue: 'pt-BR' }

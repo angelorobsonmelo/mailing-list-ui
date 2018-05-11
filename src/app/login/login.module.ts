@@ -1,3 +1,4 @@
+import { AuthGuard } from './../auth/AuthGuard';
 import { CoreModule } from './../core/core.module';
 import { MaterialModule } from './../material/material.module';
 import { NgModule } from '@angular/core';
@@ -14,6 +15,6 @@ import { AuthService } from '../auth/AuthService';
     CoreModule,
   ],
   declarations: [LoginComponent],
-  providers: [AuthService]
+  providers: [AuthGuard, AuthService]
 })
 export class LoginModule { }
