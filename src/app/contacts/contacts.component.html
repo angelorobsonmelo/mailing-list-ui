@@ -61,13 +61,6 @@
       </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="inserted by">
-      <mat-header-cell *matHeaderCellDef> Inserted by </mat-header-cell>
-      <mat-cell *matCellDef="let element">
-        {{element.userAppDto.firstName}} {{element.userAppDto.lastName}}
-      </mat-cell>
-    </ng-container>
-
     <ng-container matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
       <mat-cell *matCellDef="let element">

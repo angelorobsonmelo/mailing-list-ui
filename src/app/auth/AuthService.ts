@@ -13,7 +13,6 @@ const tokenStorage = new TokenStorage();
 
 @Injectable()
 export class AuthService {
-  jwtPayload: any;
   oauthTokenUrl: string;
 
   constructor(private router: Router, private http: Http) {
@@ -27,9 +26,10 @@ export class AuthService {
     return this.http.post(`${environment.apiUrl}/auth`, body)
       .toPromise()
       .then(response => {
-        console.log(response);
-        tokenStorage.saveRawToken(response.json().data.token);
-        tokenStorage.saveDecodedToken(helper.decodeToken(response.json().data.token));
+        let token = response.json().data.token;
+        console.log("ffasfsafsad");
+        this.saveToken(token);
+
       })
       .catch(response => {
         const responseJson = response.json();
@@ -43,7 +43,7 @@ export class AuthService {
             console.log('unauthorized')
             return Promise.reject('Usuário bloqueado!');
           }
-        }  else if (response.status === 401) {
+        } else if (response.status === 401) {
           if (responseJson.exception === 'org.springframework.security.authentication.BadCredentialsException') {
             console.log('Usuário ou senha inválida!')
             return Promise.reject('Usuário bloqueado!');
@@ -56,7 +56,6 @@ export class AuthService {
 
   isTokenExpired() {
     const token = tokenStorage.getToken();
-     console.log(token);
     return !token || helper.isTokenExpired(token);
   }
 
@@ -71,10 +70,8 @@ export class AuthService {
     return this.http.post(`${environment.apiUrl}/refresh`, body)
       .toPromise()
       .then(response => {
-        tokenStorage.saveRawToken(response.json().access_token);
-
-        console.log('Novo access token criado!');
-
+        let token = response.json().access_token;
+        this.saveToken(token);
         return Promise.resolve(null);
       })
       .catch(response => {
@@ -83,7 +80,7 @@ export class AuthService {
       });
   }
 
-  haveAnyPermission(roles) {
+  haveAnyPermission(roles): boolean {
     for (const role of roles) {
       if (this.isAllowed(role)) {
         return true;
@@ -94,14 +91,22 @@ export class AuthService {
   }
 
   isAllowed(role: string) {
-    return this.jwtPayload && this.jwtPayload.authorities.includes(role);
+    const token = tokenStorage.getToken();
+    let jwtPayload = helper.decodeToken(token);
+
+    return jwtPayload && jwtPayload.role === role;
+  }
+
+  private saveToken(token: string) {
+    tokenStorage.saveRawToken(token);
+    tokenStorage.saveDecodedToken(helper.decodeToken(token));
   }
 
   private loadToken() {
-    const token = localStorage.getItem('jtwToken');
+    const token = tokenStorage.getToken();
 
     if (token) {
-      tokenStorage.saveRawToken(token);
+      this.saveToken(token);
     }
   }
 

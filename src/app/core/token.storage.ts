@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Jsonp } from '@angular/http';
 
-const TOKEN_KEY = 'jtwToken';
+const TOKEN_KEY = 'jwtToken';
 const DECODED_TOKEN_KEY = 'decodedToken';
 
 @Injectable()
@@ -9,7 +9,7 @@ export class TokenStorage {
 
   constructor() { }
 
-  signOut() {
+  clearAccessTokenLocalStorage() {
     localStorage.removeItem(TOKEN_KEY);
     localStorage.removeItem(DECODED_TOKEN_KEY);
   }

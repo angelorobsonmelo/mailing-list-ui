@@ -28,7 +28,7 @@ export class ContactsComponent implements OnInit {
   dataSource: any;
   contact = new ContactSave();
   genders = ['MALE', 'FEMALE'];
-  displayedColumns = ['username Instagram', 'category', 'gender', 'functions', 'inserted by', 'actions'];
+  displayedColumns = ['username Instagram', 'category', 'gender', 'functions', 'actions'];
 
   constructor(private contactsService: ContactsService, private functionService: FunctionService, private categoryService: CategoryService,
     private dialog: MatDialog) { }
