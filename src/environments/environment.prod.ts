@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://localhost:8080/api/rest/v1',
+  apiUrl: 'http://maillinglist-api.herokuapp.com/api/rest/v1',
 
 };
