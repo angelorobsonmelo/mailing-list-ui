@@ -9,6 +9,7 @@ import { FunctionService } from '../functions/functions.service';
 import { CategoryService } from '../categories/categories.service';
 import { MatDialog, MatDialogConfig } from "@angular/material";
 import { RemoveContactComponent } from './remove-contact/remove-contact.component';
+import { Alert } from 'selenium-webdriver';
 
 @Component({
   selector: 'app-contacts',
@@ -137,11 +138,11 @@ export class ContactsComponent implements OnInit {
 
   delete(id: number) {
     this.contactsService.delete(id).subscribe(response => {
-      console.log('removido com sucesso');
+      alert('removido com sucesso');
       this.getContacts(this.curentPage, this.currentPageSize);
     },
       error => {
-
+        alert(error);
       }
     )
   }
@@ -159,21 +160,21 @@ export class ContactsComponent implements OnInit {
 
   save(contactSave: ContactSave) {
     this.contactsService.save(contactSave).subscribe(response => {
+      alert("Salvo com sucesso!");
       this.getContacts(this.curentPage, this.currentPageSize);
-      console.log("salvou");
     },
       error => {
-
+        alert(error);
       })
   }
 
   update(contactSave: ContactSave) {
     this.contactsService.update(contactSave).subscribe(response => {
+      alert("Atualizado com sucesso!");
       this.getContacts(this.curentPage, this.currentPageSize);
-      console.log("salvou");
     },
       error => {
-
+        alert(error);
       })
   }
 

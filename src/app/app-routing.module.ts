@@ -29,7 +29,7 @@ const routes: Routes = [
     loadChildren: 'app/functions/functions.module#FunctionsModule'
   },
 
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'contacts', pathMatch: 'full' },
   { path: 'nao-autorizado', component: NaoAutorizadoComponent },
   { path: 'pagina-nao-encontrada', component: PaginaNaoEncontradaComponent },
   { path: '**', redirectTo: 'pagina-nao-encontrada' }

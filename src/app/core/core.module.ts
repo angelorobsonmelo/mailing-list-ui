@@ -7,6 +7,7 @@ import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada.component';
 import { NaoAutorizadoComponent } from './nao-autorizado.component';
+import { SnacBarSuccessComponent } from './snac-bar-success/snac-bar-success.component';
 
 
 @NgModule({

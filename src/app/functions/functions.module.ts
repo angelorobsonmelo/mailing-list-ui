@@ -10,6 +10,7 @@ import { TokenInterceptor } from '../auth/TokenInterceptor';
 import { HttpClient } from '@angular/common/http';
 import { SaveFunctionComponent } from './save-function/save-function.component';
 import { RemoveFunctionComponent } from './remove-function/remove-function.component';
+import { SnacBarSuccessComponent } from '../core/snac-bar-success/snac-bar-success.component';
 
 
 @NgModule({
@@ -30,10 +31,11 @@ import { RemoveFunctionComponent } from './remove-function/remove-function.compo
       multi: true
     }
   ],
-  declarations: [FunctionsComponent, SaveFunctionComponent, RemoveFunctionComponent],
+  declarations: [FunctionsComponent, SaveFunctionComponent, RemoveFunctionComponent, SnacBarSuccessComponent],
   entryComponents: [
     SaveFunctionComponent,
-    RemoveFunctionComponent
+    RemoveFunctionComponent,
+    SnacBarSuccessComponent
   ]
 })
 export class FunctionsModule { }

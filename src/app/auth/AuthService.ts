@@ -59,15 +59,16 @@ export class AuthService {
     return !token || helper.isTokenExpired(token);
   }
 
-  logout() {
-    localStorage.clear();
-    this.router.navigate(['/login']);
-  }
-
   getNewAccessToken(): Promise<void> {
     let body = tokenStorage.getToken();
 
-    return this.http.post(`${environment.apiUrl}/refresh`, body)
+    const headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Authorization', `Bearer ${body}`);
+
+       const options = new RequestOptions({headers: headers});
+
+    return this.http.post(`${environment.apiUrl}/auth/refresh`, null, options)
       .toPromise()
       .then(response => {
         let token = response.json().access_token;

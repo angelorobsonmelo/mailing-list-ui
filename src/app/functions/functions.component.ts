@@ -1,4 +1,4 @@
-import { MatDialogConfig } from '@angular/material';
+import { MatDialogConfig, MatSnackBar } from '@angular/material';
 import { MatDialog } from '@angular/material';
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
@@ -9,6 +9,7 @@ import { PageEvent } from '@angular/material';
 import { FormControl } from '@angular/forms';
 import { SaveFunctionComponent } from './save-function/save-function.component';
 import { RemoveFunctionComponent } from './remove-function/remove-function.component';
+import { SnacBarSuccessComponent } from '../core/snac-bar-success/snac-bar-success.component';
 
 
 
@@ -28,7 +29,7 @@ export class FunctionsComponent implements OnInit {
   displayedColumns = ['function', 'actions'];
   function = new Function();
 
-  constructor(private dialog: MatDialog, private functionService: FunctionService) { }
+  constructor(private dialog: MatDialog, private functionService: FunctionService, public snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.getFunctionsPageable();
@@ -44,7 +45,7 @@ export class FunctionsComponent implements OnInit {
       this.dataSource = new MatTableDataSource<Function>(functions);
     },
       error => {
-
+        alert(error);
       })
   }
 
@@ -95,10 +96,11 @@ export class FunctionsComponent implements OnInit {
 
   update(func: Function) {
     this.functionService.update(func).subscribe(response => {
+      alert("Atualizado com sucesso!");
       this.getFunctionsPageable(this.curentPage, this.currentPageSize);
     },
       error => {
-
+        alert(error);
       })
   }
 
@@ -115,18 +117,17 @@ export class FunctionsComponent implements OnInit {
 
   save(func: Function) {
     this.functionService.save(func).subscribe(response => {
+      alert("Salvo com sucesso!");
       this.getFunctionsPageable(this.curentPage, this.currentPageSize);
     },
       error => {
-
+        alert(error);
       })
   }
 
   remove(fun: Function) {
     let dialogConfig = this.configRemoveDialog(fun);
-
     const dialogRef = this.dialog.open(RemoveFunctionComponent, dialogConfig);
-
     dialogRef.afterClosed().subscribe(
       data => {
         if (data) {
@@ -149,12 +150,19 @@ export class FunctionsComponent implements OnInit {
 
   delete(id: number) {
     this.functionService.delete(id).subscribe(response => {
+      alert("Removido com sucesso!");
       this.getFunctionsPageable(this.curentPage, this.currentPageSize);
     },
       error => {
-
+        alert(error);
       }
     )
+  }
+
+  changePaginator(event: PageEvent) {
+    this.curentPage = event.pageIndex;
+    this.currentPageSize = event.pageSize;
+    this.getFunctionsPageable(this.curentPage, this.currentPageSize)
   }
 
 }

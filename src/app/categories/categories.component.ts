@@ -43,7 +43,7 @@ export class CategoriesComponent implements OnInit {
       this.dataSource = new MatTableDataSource<Category>(categories);
     },
       error => {
-
+        alert(error);
       })
   }
 
@@ -92,10 +92,11 @@ export class CategoriesComponent implements OnInit {
 
   save(category: Category) {
     this.categoryService.save(category).subscribe(response => {
+      alert("Salvo com sucesso!");
       this.getCategoriesPageable(this.curentPage, this.currentPageSize);
     },
       error => {
-
+        alert(error);
       })
   }
 
@@ -145,20 +146,22 @@ export class CategoriesComponent implements OnInit {
 
   delete(id: number) {
     this.categoryService.delete(id).subscribe(response => {
+      alert("Removido com sucesso!");
       this.getCategoriesPageable(this.curentPage, this.currentPageSize);
     },
       error => {
-
+        alert(error);
       }
     )
   }
 
   update(category: Category) {
     this.categoryService.update(category).subscribe(response => {
+      alert("Atualizado com sucesso!");
       this.getCategoriesPageable(this.curentPage, this.currentPageSize);
     },
       error => {
-
+        alert(error);
       })
   }
 
