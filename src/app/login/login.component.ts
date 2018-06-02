@@ -31,6 +31,7 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/contacts']);
     })
     .catch(erro => {
+      alert("usuário ou senha inválida");
       console.log(erro);
     });
   }
